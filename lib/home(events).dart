@@ -120,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Hi Ushodaya',
+                            Text(widget.name,
                                 style: TextStyle(
                                     fontSize: 14, color: Colors.black54)),
                             Text('Good Morning',
@@ -216,22 +216,22 @@ class _HomePageState extends State<HomePage> {
                 ),
               if (searchQuery.isEmpty) ...[
               SizedBox(height: 30),
-              SectionWidget(
-                title: 'Places',
-                onTapShowAll: () {},
-                itemList: [
-                  'Library',
-                  'Auditorium',
-                  'Playground',
-                  'Canteen',
-                  'Campus',
-                  'Lab',
-                  'Classroom',
-                ],
-                imageKeyword: 'college',
-                isPlace: true,
-              ),
-              SizedBox(height: 30),
+              // SectionWidget(
+              //   title: 'Places',
+              //   onTapShowAll: () {},
+              //   itemList: [
+              //     'Library',
+              //     'Auditorium',
+              //     'Playground',
+              //     'Canteen',
+              //     'Campus',
+              //     'Lab',
+              //     'Classroom',
+              //   ],
+              //   imageKeyword: 'college',
+              //   isPlace: true,
+              // ),
+             // SizedBox(height: 30),
               AnimatedSection(
                 delay: 600,
                 child: SectionWidget(

@@ -1,23 +1,25 @@
 
 //import 'dart:nativewrappers/_internal/vm/lib/math_patch.dart';
 
+import 'package:app4/indetail.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 class Events extends StatelessWidget {
-  const Events ({super.key});
+ const Events ({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: HomePage(name: '',),
     );
   }
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final String name;
+  const HomePage({super.key,required this.name});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -31,7 +33,26 @@ class _HomePageState extends State<HomePage> {
       throw Exception('Could not launch $url');
     }
   }
-
+  final List<String> allEvents = [
+    'Hackathon',
+    'AI Seminar',
+    'Sports Meet',
+    'Robo Fest',
+    'Tech Talk',
+  ];
+  List<String> filteredEvents = [];
+  String searchQuery = '';
+  @override
+  void initState(){
+    super.initState();
+    filteredEvents = allEvents;
+  }
+  void updateSearch(String value){
+    setState((){
+      searchQuery = value.toLowerCase();
+      filteredEvents = allEvents.where((event) => event.toLowerCase().contains(searchQuery)).toList(); 
+    });
+  }
   @override
   Widget build(BuildContext context) {
     int page=0;
@@ -52,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                     radius: 30,
                   ),
                   SizedBox(height: 10),
-                  Text('Ushodaya', style: TextStyle(color: Colors.white)),
+                  Text(widget.name, style: TextStyle(color: Colors.white)),
                 ],
               ),
             ),
@@ -168,6 +189,48 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
+              SizedBox(height: 20),
+              if (searchQuery.isNotEmpty)
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Search Results:',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold)),
+                    SizedBox(height: 10),
+                    ...filteredEvents.map((event) => Card(
+                          child: ListTile(
+                            title: Text(event),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) =>
+                                      EventDetailPage(eventName: event),
+                                ),
+                              );
+                            },
+                          ),
+                        )),
+                  ],
+                ),
+              if (searchQuery.isEmpty) ...[
+              SizedBox(height: 30),
+              SectionWidget(
+                title: 'Places',
+                onTapShowAll: () {},
+                itemList: [
+                  'Library',
+                  'Auditorium',
+                  'Playground',
+                  'Canteen',
+                  'Campus',
+                  'Lab',
+                  'Classroom',
+                ],
+                imageKeyword: 'college',
+                isPlace: true,
+              ),
               SizedBox(height: 30),
               AnimatedSection(
                 delay: 600,
@@ -195,7 +258,16 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   spacing: 7,
                   children: [
-                    Align(alignment:Alignment.topLeft,child: Text("Highlights",style:TextStyle(fontSize: 20,fontWeight: FontWeight.bold))),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Align(alignment:Alignment.topLeft,child: Text("Highlights",style:TextStyle(fontSize: 20,fontWeight: FontWeight.bold))),
+                        TextButton(onPressed: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Details()));
+
+                        }, child: Text("See more",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),))
+                      ],
+                    ),
                     CarouselSlider(
                       items: [
                         Image.network('https://images.unsplash.com/photo-1557683316-973673baf926', fit: BoxFit.cover),
@@ -230,9 +302,11 @@ class _HomePageState extends State<HomePage> {
               ),
               
             ],
-          ),
-        ),
+            ]
+          
       ),
+    )
+      )
     );
   }
 }

@@ -25,8 +25,8 @@ class _HomeState extends State<Home> {
               height: double.infinity,
               viewportFraction: 1.0, 
               enableInfiniteScroll: true,
-              autoPlayInterval: Duration(seconds: 1),
-              autoPlayAnimationDuration: Duration(seconds: 1),
+              autoPlayInterval: Duration(seconds: 2),
+              autoPlayAnimationDuration: Duration(seconds: 2),
               onPageChanged: (index, reason) => setState(() {
                 page = index;
               }),

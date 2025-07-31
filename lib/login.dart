@@ -67,7 +67,7 @@ class _MynewState extends State<Mylog> {
   } else {
     // ScaffoldMessenger.of(context).showSnackBar(
     //   const SnackBar(content: Text("Login successful")),
-       Navigator.push(context, MaterialPageRoute(builder: (context)=>MainScreen()));
+       Navigator.push(context, MaterialPageRoute(builder: (context)=>MainScreen(name: enteredUsername,)));
   }
 }
 

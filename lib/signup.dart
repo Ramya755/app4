@@ -194,7 +194,7 @@ class _MynewState extends State<Mynew> {
                   ElevatedButton(
                     onPressed: () {
                       if (_key.currentState!.validate()) {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>MainScreen()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>MainScreen(name: _name.text)));
                       }
                     },
                     style: ElevatedButton.styleFrom(

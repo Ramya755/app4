@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 class MyProfile extends StatefulWidget {
-  const MyProfile({super.key});
+  String name;
+   MyProfile({super.key,required this.name});
 
   @override
   State<MyProfile> createState() => _MyAppState();
@@ -31,9 +32,9 @@ class _MyAppState extends State<MyProfile> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                const Center(child: Text("Ramya", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold))),
-                const Center(child: Text("9515204789", style: TextStyle(fontSize: 16))),
-                const Center(child: Text("ramya@gmail.com", style: TextStyle(fontSize: 16))),
+                 Center(child: Text(widget.name, style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold))),
+                Center(child: Text("9515204789", style: TextStyle(fontSize: 16))),
+                Center(child: Text("ramya@gmail.com", style: TextStyle(fontSize: 16))),
                 const SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,

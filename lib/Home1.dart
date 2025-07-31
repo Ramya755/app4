@@ -7,17 +7,19 @@ import 'package:flutter/material.dart';
 
 
 class MainScreen extends StatefulWidget {
-  const MainScreen ({super.key});
+  final String name;
+  const MainScreen ({super.key,required this.name});
 
   @override
   State<MainScreen> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MainScreen> {
-  final List screen = [HomePage(), ChatbotPage(), NotesApp(),MyProfile()];
+  
   int _controller = 0;
   @override
   Widget build(BuildContext context) {
+    final List screen = [HomePage(name: widget.name,), ChatbotPage(), NotesApp(),MyProfile(name: widget.name,)];
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 

@@ -20,13 +20,13 @@ class _HomeState extends State<Home> {
           CarouselSlider(
             options: CarouselOptions(
               enlargeCenterPage: true,
-              enlargeFactor: 2.0,
+              //enlargeFactor: 0.5,
               autoPlay: true,
               height: double.infinity,
               viewportFraction: 1.0, 
               enableInfiniteScroll: true,
               autoPlayInterval: Duration(seconds: 1),
-              autoPlayAnimationDuration: Duration(milliseconds:500),
+              autoPlayAnimationDuration: Duration(seconds: 1),
               onPageChanged: (index, reason) => setState(() {
                 page = index;
               }),

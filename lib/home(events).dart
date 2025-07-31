@@ -119,120 +119,116 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(height: 25),
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
+              AnimatedSection
+              (
+                delay: 600,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 15),
+                        height: 55,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(Icons.search, color: Colors.grey),
+                            SizedBox(width: 10),
+                            Expanded(
+                              child: TextField(
+                                decoration: InputDecoration(
+                                    hintText: 'Search events...',
+                                    border: InputBorder.none),
+                                onSubmitted: (query) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => SearchResultPage(query),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 15),
+                    Container(
                       height: 55,
+                      width: 55,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Color(0xFF4F46E5),
                         borderRadius: BorderRadius.circular(15),
                       ),
-                      child: Row(
-                        children: [
-                          Icon(Icons.search, color: Colors.grey),
-                          SizedBox(width: 10),
-                          Expanded(
-                            child: TextField(
-                              decoration: InputDecoration(
-                                  hintText: 'Search events...',
-                                  border: InputBorder.none),
-                              onSubmitted: (query) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => SearchResultPage(query),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        ],
+                      child: Icon(Icons.tune, color: Colors.white),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 30),
+              AnimatedSection(
+                delay: 600,
+                child: SectionWidget(
+                  title: 'Places',
+                  onTapShowAll: () {},
+                  itemList: [
+                    'Library',
+                    'Auditorium',
+                    'Playground',
+                    'Canteen',
+                    'Campus',
+                    'Lab',
+                    'Classroom',
+                  ],
+                  imageKeyword: 'college',
+                  isPlace: true,
+                ),
+              ),
+              SizedBox(height: 30),
+              // AnimatedSection(delay: 600,child: AnimatedContainer(duration: Duration(seconds: 3),child: Text("Highlight",style:TextStyle(fontSize: 30,fontWeight: FontWeight.bold)))),
+              Container(
+                child: AnimatedSection(
+                delay: 600,
+                child: Column(
+                  spacing: 7,
+                  children: [
+                    Align(alignment:Alignment.topLeft,child: Text("Highlights",style:TextStyle(fontSize: 20,fontWeight: FontWeight.bold))),
+                    CarouselSlider(
+                      items: [
+                        Image.network('https://images.unsplash.com/photo-1557683316-973673baf926', fit: BoxFit.cover),
+                        Image.network('https://images.unsplash.com/photo-1557683316-973673baf926', fit: BoxFit.cover),
+                        Image.network('https://images.unsplash.com/photo-1557683316-973673baf926', fit: BoxFit.cover),
+                        Image.network('https://images.unsplash.com/photo-1557683316-973673baf926', fit: BoxFit.cover),
+                      ],
+                      options: CarouselOptions(
+                        height: 200.0,
+                        aspectRatio: 16 / 9,
+                        viewportFraction: 0.8,
+                        initialPage: 0,
+                        enableInfiniteScroll: true,
+                        reverse: false,
+                        autoPlay: true,
+                        autoPlayInterval: const Duration(seconds: 3),
+                        autoPlayAnimationDuration: const Duration(seconds: 1),
+                        autoPlayCurve: Curves.fastOutSlowIn,
+                        enlargeCenterPage: true,
+                        enlargeFactor: 0.3,
+                        scrollDirection: Axis.horizontal,
+                        onPageChanged: (index, reason) {
+                          setState(() {
+                            page = index;
+                          });
+                        },
                       ),
                     ),
-                  ),
-                  SizedBox(width: 15),
-                  Container(
-                    height: 55,
-                    width: 55,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF4F46E5),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Icon(Icons.tune, color: Colors.white),
-                  ),
-                ],
+                  ],
+                ),
+                            ),
               ),
-              SizedBox(height: 30),
-              SectionWidget(
-                title: 'Places',
-                onTapShowAll: () {},
-                itemList: [
-                  'Library',
-                  'Auditorium',
-                  'Playground',
-                  'Canteen',
-                  'Campus',
-                  'Lab',
-                  'Classroom',
-                ],
-                imageKeyword: 'college',
-                isPlace: true,
-              ),
-              SizedBox(height: 30),
-              // SectionWidget(
-              //   title: 'Events',
-              //   onTapShowAll: () {},
-              //   itemList: [
-              //     'Hackathon 2025',
-              //     'AI Seminar',
-              //     'Sports Meet',
-              //     'Robo Fest',
-              //     'Cultural Fest',
-              //   ],
-              //   imageKeyword: 'event',
-              //   isPlace: false,
-              // ),
-              // SizedBox(height: 30),
-              CarouselSlider(items: [
-                Image(image: NetworkImage('https://images.unsplash.com/photo-1557683316-973673baf926')),
-                Image(image: NetworkImage('https://images.unsplash.com/photo-1557683316-973673baf926')),
-                
-                Image(image: NetworkImage('https://images.unsplash.com/photo-1557683316-973673baf926')),
-                
-                Image(image: NetworkImage('https://images.unsplash.com/photo-1557683316-973673baf926')),
-                
-              ], options:CarouselOptions(
-       height: 200.0, 
-  aspectRatio: 16 / 9, 
-  viewportFraction: 0.8, 
-  initialPage: 0, 
-  enableInfiniteScroll: true, 
-  reverse: false, 
-  autoPlay: true, 
-  autoPlayInterval: Duration(seconds: 3), 
-  autoPlayAnimationDuration: Duration(seconds: 1), 
-  autoPlayCurve: Curves.fastOutSlowIn, 
-  enlargeCenterPage: true, 
-  enlargeFactor: 4.0,
-  scrollDirection: Axis.horizontal, 
-  onPageChanged: (index, reason) {
-    setState(() {
-      page = index;
-    });
-  },
-)
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => ChatbotPage()),
-                  );
-                },
-                child: Text('Ask College Chatbot'),
-              ),
+              
             ],
           ),
         ),
@@ -543,5 +539,84 @@ class _ChatbotPageState extends State<ChatbotPage> {
         ],
       ),
     );
+  }
+}
+class AnimatedSection extends StatefulWidget {
+  final Widget child;
+  final int delay;
+
+  const AnimatedSection({
+    super.key,
+    required this.child,
+    this.delay = 0,
+  });
+
+  @override
+  State<AnimatedSection> createState() => _AnimatedSectionState();
+}
+
+class _AnimatedSectionState extends State<AnimatedSection>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<Offset> _slideAnimation;
+  late Animation<double> _fadeAnimation;
+  late Animation<double> _scaleAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 1000),
+      vsync: this,
+    );
+
+    _slideAnimation = Tween<Offset>(
+      begin: const Offset(0, 0.2),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(
+      parent: _controller,
+      curve: const Interval(0.0, 0.5, curve: Curves.easeOut),
+    ));
+
+    _fadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: _controller,
+      curve: const Interval(0.3, 1.0, curve: Curves.easeIn),
+    ));
+
+    _scaleAnimation = Tween<double>(
+      begin: 0.95,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: _controller,
+      curve: const Interval(0.0, 1.0, curve: Curves.easeInOutBack),
+    ));
+
+    Future.delayed(Duration(milliseconds: widget.delay), () {
+      if (mounted) _controller.forward();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SlideTransition(
+      position: _slideAnimation,
+      child: FadeTransition(
+        opacity: _fadeAnimation,
+        child: ScaleTransition(
+          scale: _scaleAnimation,
+          child: widget.child,
+        ),
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }

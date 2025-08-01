@@ -1,3 +1,5 @@
+import 'package:app4/main.dart';
+import 'package:app4/mynotes.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
@@ -36,25 +38,33 @@ class _MyProfileState extends State<MyProfile> with SingleTickerProviderStateMix
     super.dispose();
   }
 
+  void _logout() {
+   Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => MyApp()),
+    );
+  }
+
+  void _goToNotes() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const NotesApp()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "My Profile",
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-        ),
+        title: const Text("My Profile", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
         centerTitle: true,
-        backgroundColor: Colors.indigo, // Changed back to strong blue
+        backgroundColor: Colors.indigo,
       ),
       body: Container(
         width: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              Color(0xFF3E8EED), // strong university-blue gradient
-              Color(0xFF6FB1FC),
-            ],
+            colors: [Color(0xFF3E8EED), Color(0xFF6FB1FC)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -63,47 +73,30 @@ class _MyProfileState extends State<MyProfile> with SingleTickerProviderStateMix
           position: _offsetAnimation,
           child: SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 40),
-                const Center(
-                  child: CircleAvatar(
-                    backgroundImage: NetworkImage(
-                      'https://images.unsplash.com/photo-1502767089025-6572583495b4?auto=format&fit=crop&w=500&q=60',
-                    ),
-                    radius: 50,
+                const CircleAvatar(
+                  backgroundImage: NetworkImage(
+                    'https://images.unsplash.com/photo-1502767089025-6572583495b4?auto=format&fit=crop&w=500&q=60',
                   ),
+                  radius: 50,
                 ),
                 const SizedBox(height: 10),
-                Center(
-                  child: Text(
-                    widget.name,
-                    style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
-                  ),
-                ),
-                const Center(
-                  child: Text("9515204789", style: TextStyle(fontSize: 16, color: Colors.white70)),
-                ),
-                const Center(
-                  child: Text("ramya@gmail.com", style: TextStyle(fontSize: 16, color: Colors.white70)),
-                ),
+                Text(widget.name, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
+                const Text("ramya@gmail.com", style: TextStyle(fontSize: 16, color: Colors.white70)),
                 const SizedBox(height: 30),
+
+                // 🔥 Pass callbacks properly here
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    _buildCard(Icons.punch_clock, "Reminders", Colors.red),
-                    _buildCard(Icons.star, "Achievements", Colors.amber),
+                    _buildCard(Icons.note, "Notes", Colors.green, _goToNotes),
+                    _buildCard(Icons.logout, "Logout", Colors.red, _logout),
                   ],
                 ),
+
                 const SizedBox(height: 30),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    _buildCard(Icons.settings, "Settings", Colors.blue),
-                    _buildCard(Icons.logout, "Logout", Colors.grey),
-                  ],
-                ),
-                const SizedBox(height: 30),
+
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Container(
@@ -111,21 +104,12 @@ class _MyProfileState extends State<MyProfile> with SingleTickerProviderStateMix
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(color: Colors.black12, width: 2),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black26,
-                          blurRadius: 6,
-                          offset: Offset(0, 2),
-                        ),
-                      ],
+                      boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))],
                     ),
                     padding: const EdgeInsets.all(16),
                     child: Column(
                       children: [
-                        const Text(
-                          "Weekly Streak",
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87),
-                        ),
+                        const Text("Weekly Streak", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87)),
                         const SizedBox(height: 16),
                         SizedBox(
                           height: 200,
@@ -142,15 +126,9 @@ class _MyProfileState extends State<MyProfile> with SingleTickerProviderStateMix
                                     },
                                   ),
                                 ),
-                                leftTitles: AxisTitles(
-                                  sideTitles: SideTitles(showTitles: true),
-                                ),
-                                rightTitles: AxisTitles(
-                                  sideTitles: SideTitles(showTitles: false),
-                                ),
-                                topTitles: AxisTitles(
-                                  sideTitles: SideTitles(showTitles: false),
-                                ),
+                                leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: true)),
+                                rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                                topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
                               ),
                               borderData: FlBorderData(show: true),
                               lineBarsData: [
@@ -185,29 +163,30 @@ class _MyProfileState extends State<MyProfile> with SingleTickerProviderStateMix
     );
   }
 
-  Widget _buildCard(IconData icon, String label, Color color) {
-    return Card(
-      elevation: 6,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
-      shadowColor: color.withOpacity(0.5),
-      child: AnimatedContainer(
-        duration: const Duration(seconds: 1),
-        width: 140,
-        height: 120,
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Colors.white,
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, color: color, size: 40),
-            const SizedBox(height: 10),
-            Text(label, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black87)),
-          ],
+  Widget _buildCard(IconData icon, String label, Color color, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        elevation: 6,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shadowColor: color.withOpacity(0.5),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          width: 140,
+          height: 120,
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.white,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, color: color, size: 40),
+              const SizedBox(height: 10),
+              Text(label, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black87)),
+            ],
+          ),
         ),
       ),
     );

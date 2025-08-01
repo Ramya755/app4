@@ -1,4 +1,5 @@
 
+import 'package:app4/admin.dart';
 import 'package:app4/login.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -23,7 +24,7 @@ class _HomeState extends State<Home> {
   final List<String> texts = [
     "Smart Updates. Smarter Campus.",
     "Find Places. Join Events Easily.",
-    "Everything You Need. In One App.",
+    "Connect,participate,and Explore.",
   ];
 
   @override
@@ -76,13 +77,13 @@ class _HomeState extends State<Home> {
             ),
           ),
           Positioned(
-            bottom: 90,
+            bottom: 30,
             right: 20,
             child: ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Mylog()),
+                  MaterialPageRoute(builder: (context) =>Mylog()),
                 );
               },
               style: ElevatedButton.styleFrom(

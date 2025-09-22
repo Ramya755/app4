@@ -62,13 +62,7 @@ class _MyProfileState extends State<MyProfile> with SingleTickerProviderStateMix
       ),
       body: Container(
         width: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFF3E8EED), Color(0xFF6FB1FC)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
+        decoration: BoxDecoration(color: Color(0xFFEFF4FB),),
         child: SlideTransition(
           position: _offsetAnimation,
           child: SingleChildScrollView(

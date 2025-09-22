@@ -1,6 +1,3 @@
-
-//import 'dart:nativewrappers/_internal/vm/lib/math_patch.dart';
-
 import 'package:app4/indetail.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +22,8 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> 
+{
   void _launchMaps() async {
     final Uri url = Uri.parse(
         'https://www.google.com/maps/search/?api=1&query=Infosphere+E+AdityaCollege+Surampalem');
@@ -57,7 +55,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     int page=0;
     return Scaffold(
-      backgroundColor: Color(0xFFEFF4FB),
+       backgroundColor: Color(0xFFEFF4FB),
+      //backgroundColor: Colors.lightBlue,
       endDrawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -216,43 +215,60 @@ class _HomePageState extends State<HomePage> {
                 ),
               if (searchQuery.isEmpty) ...[
               SizedBox(height: 30),
-              // SectionWidget(
-              //   title: 'Places',
-              //   onTapShowAll: () {},
-              //   itemList: [
-              //     'Library',
-              //     'Auditorium',
-              //     'Playground',
-              //     'Canteen',
-              //     'Campus',
-              //     'Lab',
-              //     'Classroom',
-              //   ],
-              //   imageKeyword: 'college',
-              //   isPlace: true,
-              // ),
-             // SizedBox(height: 30),
-              AnimatedSection(
-                delay: 600,
-                child: SectionWidget(
-                  title: 'Places',
-                  onTapShowAll: () {},
-                  itemList: [
-                    'Library',
-                    'Auditorium',
-                    'Playground',
-                    'Canteen',
-                    'Campus',
-                    'Lab',
-                    'Classroom',
-                  ],
-                  imageKeyword: 'college',
-                  isPlace: true,
+              Align(alignment:Alignment.topLeft,child: Text("Live Updates",style:TextStyle(fontSize: 20,fontWeight: FontWeight.bold))),
+              SizedBox(
+                child: AnimatedSection(
+                  delay: 600,
+                  child: CarouselSlider(
+                     items : [
+                      'https://www.rset.edu.in/gscc/wp-content/uploads/sites/8/2019/12/1507024386_3_n.jpg',
+                      'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/coding-competition-design-template-87dba6fa6e8291b8fe5e29abc492288a_screen.jpg?ts=1676540509',
+                      'https://tse4.mm.bing.net/th/id/OIP.82ySgi_em1NCTHkFmL4xdgHaEu?r=0&cb=thfvnext&rs=1&pid=ImgDetMain&o=7&rm=3',
+  'https://images.unsplash.com/photo-1507525428034-b723cf961d3e',
+  'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee',
+]
+.map((url) {
+                      return Material(
+                        elevation: 5, // shadow effect
+                        borderRadius: BorderRadius.circular(15),
+                        clipBehavior: Clip.antiAlias, // ensures radius is applied to image
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: Image.network(
+                            url,
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                    options: CarouselOptions(
+                      height: 150.0,
+                      aspectRatio: 16 / 9,
+                      viewportFraction: 0.85,
+                      initialPage: 0,
+                      enableInfiniteScroll: true,
+                      reverse: false,
+                      //autoPlay: true,
+                      autoPlayInterval: const Duration(seconds: 3),
+                      autoPlayAnimationDuration: const Duration(seconds: 1),
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      enlargeCenterPage: true,
+                      enlargeFactor: 0.3,
+                      scrollDirection: Axis.horizontal,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          page = index;
+                        });
+                      },
+                    ),
+                  ),
                 ),
               ),
-              SizedBox(height: 30),
-              // AnimatedSection(delay: 600,child: AnimatedContainer(duration: Duration(seconds: 3),child: Text("Highlight",style:TextStyle(fontSize: 30,fontWeight: FontWeight.bold)))),
-              Container(
+              SizedBox(height: 30), 
+              SizedBox(
+                // width: double.infinity,
+                // height: 200,
                 child: AnimatedSection(
                 delay: 600,
                 child: Column(
@@ -270,10 +286,10 @@ class _HomePageState extends State<HomePage> {
                     ),
                     CarouselSlider(
                       items: [
-                        Image.network('https://images.unsplash.com/photo-1557683316-973673baf926', fit: BoxFit.cover),
-                        Image.network('https://images.unsplash.com/photo-1557683316-973673baf926', fit: BoxFit.cover),
-                        Image.network('https://images.unsplash.com/photo-1557683316-973673baf926', fit: BoxFit.cover),
-                        Image.network('https://images.unsplash.com/photo-1557683316-973673baf926', fit: BoxFit.cover),
+                        Image.network('https://tse4.mm.bing.net/th/id/OIP.DPhJ18GQ1aav1natxhIGUwHaEK?r=0&cb=thfvnext&rs=1&pid=ImgDetMain&o=7&rm=3', fit: BoxFit.cover),
+                        Image.network('https://tse4.mm.bing.net/th/id/OIP.82ySgi_em1NCTHkFmL4xdgHaEu?r=0&cb=thfvnext&rs=1&pid=ImgDetMain&o=7&rm=3', fit: BoxFit.cover),
+                        // Image.network('https://aditya.ac.in/aec/wp-content/uploads/2017/03/14139350731_d1603639b2.jpg ', fit: BoxFit.cover),
+                        // Image.network('https://static.zollege.in/public/reviewPhotos/290701/1000059141.jpg', fit: BoxFit.cover),
                       ],
                       options: CarouselOptions(
                         height: 200.0,
@@ -282,7 +298,7 @@ class _HomePageState extends State<HomePage> {
                         initialPage: 0,
                         enableInfiniteScroll: true,
                         reverse: false,
-                        autoPlay: true,
+                        //autoPlay: true,
                         autoPlayInterval: const Duration(seconds: 3),
                         autoPlayAnimationDuration: const Duration(seconds: 1),
                         autoPlayCurve: Curves.fastOutSlowIn,
@@ -310,109 +326,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-class SectionWidget extends StatelessWidget {
-  final String title;
-  final VoidCallback onTapShowAll;
-  final List<String> itemList;
-  final String imageKeyword;
-  final bool isPlace;
-
-  const SectionWidget({
-    super.key,
-    required this.title,
-    required this.onTapShowAll,
-    required this.itemList,
-    required this.imageKeyword,
-    required this.isPlace,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(25),
-        boxShadow: [
-          BoxShadow(color: Colors.black12, blurRadius: 10, offset: Offset(0, 5)),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(title,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-              GestureDetector(
-                onTap: onTapShowAll,
-                child: Text('Show all',
-                    style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.blueAccent,
-                        fontWeight: FontWeight.w500)),
-              ),
-            ],
-          ),
-          SizedBox(height: 20),
-          SizedBox(
-            height: isPlace ? 100 : 220,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: itemList.length,
-              itemBuilder: (context, index) {
-                final title = itemList[index];
-                final image = 'https://source.unsplash.com/200x140/?$imageKeyword,$title';
-                return GestureDetector(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => isPlace
-                          ? PlaceDetailPage(placeName: title)
-                          : EventDetailPage(eventName: title),
-                    ),
-                  ),
-                  child: isPlace
-                      ? CityCard(cityName: title, imagePath: image)
-                      : RecommendedCard(title: title, imagePath: image),
-                );
-              },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class CityCard extends StatelessWidget {
-  final String imagePath;
-  final String cityName;
-
-  const CityCard({super.key, required this.imagePath, required this.cityName});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 80,
-      margin: EdgeInsets.only(right: 15),
-      child: Column(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: Image.network(imagePath,
-                width: 60, height: 60, fit: BoxFit.cover),
-          ),
-          SizedBox(height: 8),
-          Text(cityName,
-              style: TextStyle(fontSize: 13), overflow: TextOverflow.ellipsis),
-        ],
-      ),
-    );
-  }
-}
-
 class RecommendedCard extends StatelessWidget {
   final String imagePath;
   final String title;
@@ -492,126 +405,6 @@ class SearchResultPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text("Search Results")),
       body: Center(child: Text("Results for '$query'")),
-    );
-  }
-}
-class ChatbotPage extends StatefulWidget {
-  const ChatbotPage({super.key});
-
-  @override
-  _ChatbotPageState createState() => _ChatbotPageState();
-}
-
-class _ChatbotPageState extends State<ChatbotPage> {
-  final TextEditingController controller = TextEditingController();
-  final List<Map<String, String>> messages = [];
-
-  final Map<String, String> faq = {
-  'library timings': 'The library is open from 8:00 AM to 6:00 PM on weekdays.',
-  'hod name': 'The HOD of Computer Science is Dr. K. Suresh Kumar.',
-  'placement officer': 'Our Placement Officer is Mr. Ramesh Babu, Room No. 102.',
-  'canteen menu': 'The canteen offers South Indian, North Indian meals, snacks, and beverages.',
-  'sports coordinator': 'The Sports Coordinator is Ms. Anjali, available in the sports block.',
-  'fee deadline': 'The last date to pay semester fees is 10th August.',
-  'exam schedule': 'Mid-semester exams start from 25th September.',
-  'event date': 'The Tech Fest is scheduled for 15th October.',
-  'wifi password': 'Please contact the IT department in Block C for WiFi credentials.',
-  'bus timings': 'College buses leave campus at 4:30 PM every day.',
-  'lab availability': 'Labs are open from 9:30 AM to 5:00 PM, except Sundays.',
-  'faculty advisor': 'You can find your Faculty Advisor in your department notice board list.',
-  'student login issues': 'For login problems, contact the IT Help Desk on the ground floor.',
-  'revaluation process': 'Revaluation forms are available online. Last date to apply: 20th August.',
-  'hostel rules': 'Hostel gates close by 9:00 PM. Visitors allowed between 5 PM and 7 PM.',
-  'anti ragging cell': 'For ragging complaints, contact Prof. Ravi (ext. 204).',
-  'exam results': 'Results are published on the official portal under "Examinations" tab.',
-  'college fest': 'Cultural Fest "Sparsh" will be held in December, dates to be announced.',
-  'internship portal': 'Internship opportunities are updated on the Training & Placement cell website.',
-  'dress code': 'Students must wear ID cards. Lab coats are mandatory for lab sessions.',
-};
-
-
-  void sendMessage(String message) {
-    setState(() {
-      messages.add({'user': message});
-      String lower = message.toLowerCase();
-      String? reply;
-      faq.forEach((key, value) {
-        if (lower.contains(key)) reply = value;
-      });
-      messages.add({
-        'bot': reply ?? 'Sorry, I can answer only college-related queries.'
-      });
-    });
-    controller.clear();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('College Chatbot',style: TextStyle(fontSize: 25,fontWeight:FontWeight.bold,color: Colors.indigo),)),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              padding: EdgeInsets.all(12),
-              itemCount: messages.length,
-              itemBuilder: (context, index) {
-                final message = messages[index];
-                final isUser = message.containsKey('user');
-                return Align(
-                  alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
-                  child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 4),
-                    padding: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: isUser ? Colors.blue[100] : Colors.grey[300],
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Text(
-                      isUser ? message['user']! : message['bot']!,
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-          Divider(height: 1),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
-            child: Row(
-              children: [
-                Expanded(
-                  child:
-                  AnimatedContainer(
-                    duration: Duration(seconds: 5),
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(12),
-                    border: Border.all(width: 3,color: Colors.indigo)),
-                    padding: EdgeInsets.all(16),
-                  child:
-                  TextField(
-                    style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
-                    controller: controller,
-                    
-                    decoration: InputDecoration(hintText:'Clarify your queries...',border:InputBorder.none),
-                  )
-                  ),
-                ),
-                IconButton(
-                  icon: Icon(Icons.send),
-                  onPressed: () {
-                    if (controller.text.trim().isNotEmpty) {
-                      sendMessage(controller.text.trim());
-                    }
-                  },
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

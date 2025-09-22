@@ -15,9 +15,9 @@ class _HomeState extends State<Home> {
   int page = 0;
 
   final List<List<Color>> bgColors = [
-    [Colors.blue.shade900, Colors.blue.shade400],
-    [Colors.blue.shade900, Colors.blue.shade400],
-    [Colors.blue.shade900, Colors.blue.shade400],
+    [const Color.fromARGB(255, 138, 158, 186), const Color.fromARGB(255, 162, 197, 226)],
+    [const Color.fromARGB(255, 138, 163, 201), const Color.fromARGB(255, 132, 155, 174)],
+    [const Color.fromARGB(255, 180, 186, 196), const Color.fromARGB(255, 188, 205, 219)],
     
   ];
 

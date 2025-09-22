@@ -1,3 +1,4 @@
+import 'package:app4/chatbot.dart';
 import 'package:app4/home(events).dart';
 import 'package:app4/mynotes.dart';
 import 'package:app4/profile.dart';
